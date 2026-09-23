@@ -7,7 +7,12 @@ public class Menu {
     private Kategori kategori;
     private double harga;
 
-    public Menu(String idMenu, String namaMenu, Kategori kategori, double harga) {
+    public Menu(
+            String idMenu,
+            String namaMenu,
+            Kategori kategori,
+            double harga) {
+
         this.idMenu = idMenu;
         this.namaMenu = namaMenu;
         this.kategori = kategori;
@@ -40,5 +45,25 @@ public class Menu {
 
     public void setHarga(double harga) {
         this.harga = harga;
+    }
+
+    public void tampilkanInfo() {
+
+        System.out.println(
+                "ID Menu   : " + idMenu
+        );
+
+        System.out.println(
+                "Nama Menu : " + namaMenu
+        );
+
+        System.out.println(
+                "Kategori  : "
+                + kategori.getNamaKategori()
+        );
+
+        System.out.println(
+                "Harga     : Rp" + harga
+        );
     }
 }

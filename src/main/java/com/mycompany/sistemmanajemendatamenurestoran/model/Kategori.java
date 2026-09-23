@@ -6,7 +6,11 @@ public class Kategori {
     private String namaKategori;
     private String deskripsi;
 
-    public Kategori(String idKategori, String namaKategori, String deskripsi) {
+    public Kategori(
+            String idKategori,
+            String namaKategori,
+            String deskripsi) {
+
         this.idKategori = idKategori;
         this.namaKategori = namaKategori;
         this.deskripsi = deskripsi;

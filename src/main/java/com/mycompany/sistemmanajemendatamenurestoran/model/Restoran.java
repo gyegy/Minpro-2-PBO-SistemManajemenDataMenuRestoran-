@@ -7,17 +7,19 @@ public class Restoran {
     private String namaRestoran;
     private String alamat;
     private String noTelepon;
-
     private ArrayList<Menu> daftarMenu;
     private ArrayList<Kategori> daftarKategori;
 
-    public Restoran(String namaRestoran, String alamat, String noTelepon) {
+    public Restoran(
+            String namaRestoran,
+            String alamat,
+            String noTelepon) {
+
         this.namaRestoran = namaRestoran;
         this.alamat = alamat;
         this.noTelepon = noTelepon;
-
-        daftarMenu = new ArrayList<>();
-        daftarKategori = new ArrayList<>();
+        this.daftarMenu = new ArrayList<>();
+        this.daftarKategori = new ArrayList<>();
     }
 
     public String getNamaRestoran() {
@@ -52,11 +54,70 @@ public class Restoran {
         this.noTelepon = noTelepon;
     }
 
-    public void tambahMenu(Menu menu) {
-        daftarMenu.add(menu);
-    }
-
     public void tambahKategori(Kategori kategori) {
         daftarKategori.add(kategori);
+    }
+
+    public Kategori cariKategori(String idKategori) {
+
+        for (Kategori kategori : daftarKategori) {
+
+            if (kategori.getIdKategori().equals(idKategori)) {
+                return kategori;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean tambahMenu(Menu menu) {
+
+        if (cariMenu(menu.getIdMenu()) != null) {
+            return false;
+        }
+
+        daftarMenu.add(menu);
+        return true;
+    }
+
+    public Menu cariMenu(String idMenu) {
+
+        for (Menu menu : daftarMenu) {
+
+            if (menu.getIdMenu().equals(idMenu)) {
+                return menu;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean updateMenu(
+            String idMenu,
+            String namaBaru,
+            double hargaBaru) {
+
+        Menu menu = cariMenu(idMenu);
+
+        if (menu == null) {
+            return false;
+        }
+
+        menu.setNamaMenu(namaBaru);
+        menu.setHarga(hargaBaru);
+
+        return true;
+    }
+
+    public boolean hapusMenu(String idMenu) {
+
+        Menu menu = cariMenu(idMenu);
+
+        if (menu == null) {
+            return false;
+        }
+
+        daftarMenu.remove(menu);
+        return true;
     }
 }
