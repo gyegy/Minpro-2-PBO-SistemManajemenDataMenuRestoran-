@@ -58,12 +58,9 @@ public class SistemManajemenDataMenuRestoran {
 
             tampilkanMenuUtama();
 
-            int pilihan = inputPilihan(
-                    scanner,
-                    "Pilih menu (1-7): ",
+            int pilihan = inputPilihan(scanner, "Pilih menu (1-7): ",
                     1,
-                    7
-            );
+                    7);
 
             switch (pilihan) {
 
@@ -71,38 +68,20 @@ public class SistemManajemenDataMenuRestoran {
 
                     System.out.println("\n=== TAMBAH KATEGORI ===");
 
-                    String idKategori = inputString(
-                            scanner,
-                            "ID Kategori: "
-                    );
+                    String idKategori = inputString(scanner, "ID Kategori: ");
 
-                    String namaKategori = inputString(
-                            scanner,
-                            "Nama Kategori: "
-                    );
+                    String namaKategori = inputString(scanner, "Nama Kategori: ");
 
-                    String deskripsi = inputString(
-                            scanner,
-                            "Deskripsi: "
-                    );
+                    String deskripsi = inputString(scanner, "Deskripsi: ");
 
-                    Kategori kategoriBaru = new Kategori(
-                            idKategori,
-                            namaKategori,
-                            deskripsi
-                    );
+                    Kategori kategoriBaru = new Kategori(idKategori, namaKategori, deskripsi);
 
                     if (restoran.tambahKategori(kategoriBaru)) {
 
-                        System.out.println(
-                                ">> Kategori berhasil ditambahkan"
-                        );
+                        System.out.println(">> Kategori berhasil ditambahkan");
 
                     } else {
-
-                        System.out.println(
-                                ">> ID Kategori sudah digunakan"
-                        );
+                        System.out.println(">> ID Kategori sudah digunakan");
                     }
                 }
 
@@ -112,9 +91,7 @@ public class SistemManajemenDataMenuRestoran {
 
                     if (restoran.getDaftarKategori().isEmpty()) {
 
-                        System.out.println(
-                                ">> Belum ada data kategori"
-                        );
+                        System.out.println(">> Belum ada data kategori" );
 
                         break;
                     }
@@ -122,21 +99,9 @@ public class SistemManajemenDataMenuRestoran {
                     for (Kategori kategori
                             : restoran.getDaftarKategori()) {
 
-                        System.out.println(
-                                "ID Kategori : "
-                                + kategori.getIdKategori()
-                        );
-
-                        System.out.println(
-                                "Nama        : "
-                                + kategori.getNamaKategori()
-                        );
-
-                        System.out.println(
-                                "Deskripsi   : "
-                                + kategori.getDeskripsi()
-                        );
-
+                        System.out.println("ID Kategori : "+ kategori.getIdKategori());
+                        System.out.println("Nama        : "+ kategori.getNamaKategori());
+                        System.out.println("Deskripsi   : "+ kategori.getDeskripsi());
                         System.out.println();
                     }
                 }
@@ -145,47 +110,30 @@ public class SistemManajemenDataMenuRestoran {
 
                     System.out.println("\n=== TAMBAH MENU ===");
 
-                    String idMenu = inputString(
-                            scanner,
-                            "ID Menu: "
-                    );
+                    String idMenu = inputString(scanner,"ID Menu: ");
+                    String namaMenu = inputString(scanner,"Nama Menu: ");
 
-                    String namaMenu = inputString(
-                            scanner,
-                            "Nama Menu: "
-                    );
-
-                    Kategori kategoriDipilih =
-                            pilihKategori(scanner, restoran);
+                    Kategori kategoriDipilih = pilihKategori(scanner, restoran);
 
                     if (kategoriDipilih == null) {
                         break;
                     }
 
-                    double harga = inputHarga(
-                            scanner,
-                            "Harga Menu: "
-                    );
+                    double harga = inputHarga(scanner,"Harga Menu: ");
 
                     System.out.println("\n=== PILIH JENIS MENU ===");
                     System.out.println("1. Makanan");
                     System.out.println("2. Minuman");
 
-                    int jenisMenu = inputPilihan(
-                            scanner,
-                            "Pilih jenis menu (1-2): ",
-                            1,
-                            2
-                    );
+                    int jenisMenu = inputPilihan(scanner, "Pilih jenis menu (1-2): " ,
+                            1 ,
+                            2);
 
                     Menu menuBaru;
 
                     if (jenisMenu == 1) {
 
-                        String jenisMakanan = inputString(
-                                scanner,
-                                "Jenis Makanan: "
-                        );
+                        String jenisMakanan = inputString(scanner, "Jenis Makanan: ");
 
                         menuBaru = new MenuMakanan(
                                 idMenu,
@@ -197,10 +145,7 @@ public class SistemManajemenDataMenuRestoran {
 
                     } else {
 
-                        String jenisMinuman = inputString(
-                                scanner,
-                                "Jenis Minuman: "
-                        );
+                        String jenisMinuman = inputString(scanner, "Jenis Minuman: ");
 
                         menuBaru = new MenuMinuman(
                                 idMenu,
@@ -213,15 +158,11 @@ public class SistemManajemenDataMenuRestoran {
 
                     if (restoran.tambahMenu(menuBaru)) {
 
-                        System.out.println(
-                                ">> Menu berhasil ditambahkan"
-                        );
+                        System.out.println(">> Menu berhasil ditambahkan");
 
                     } else {
 
-                        System.out.println(
-                                ">> ID Menu sudah digunakan"
-                        );
+                        System.out.println(">> ID Menu sudah digunakan");
                     }
                 }
 
@@ -231,9 +172,7 @@ public class SistemManajemenDataMenuRestoran {
 
                     if (restoran.getDaftarMenu().isEmpty()) {
 
-                        System.out.println(
-                                "Belum ada data menu"
-                        );
+                        System.out.println("Belum ada data menu");
 
                         break;
                     }
@@ -249,18 +188,13 @@ public class SistemManajemenDataMenuRestoran {
 
                     System.out.println("\n=== UPDATE MENU ===");
 
-                    String idTarget = inputString(
-                            scanner,
-                            "Masukkan ID Menu: "
-                    );
+                    String idTarget = inputString(scanner, "Masukkan ID Menu: ");
 
                     Menu menu = restoran.cariMenu(idTarget);
 
                     if (menu == null) {
 
-                        System.out.println(
-                                ">> Menu tidak ditemukan"
-                        );
+                        System.out.println(">> Menu tidak ditemukan");
 
                         break;
                     }
@@ -270,38 +204,25 @@ public class SistemManajemenDataMenuRestoran {
 
                     System.out.println();
 
-                    String namaBaru = inputString(
-                            scanner,
-                            "Nama Menu Baru: "
-                    );
+                    String namaBaru = inputString(scanner, "Nama Menu Baru: ");
 
-                    Kategori kategoriBaru =
-                            pilihKategori(scanner, restoran);
+                    Kategori kategoriBaru = pilihKategori(scanner, restoran);
 
                     if (kategoriBaru == null) {
                         break;
                     }
 
-                    double hargaBaru = inputHarga(
-                            scanner,
-                            "Harga Baru: "
-                    );
+                    double hargaBaru = inputHarga(scanner, "Harga Baru: ");
 
                     String jenisBaru;
 
                     if (menu instanceof MenuMakanan) {
 
-                        jenisBaru = inputString(
-                                scanner,
-                                "Jenis Makanan Baru: "
-                        );
+                        jenisBaru = inputString(scanner, "Jenis Makanan Baru: ");
 
                     } else {
 
-                        jenisBaru = inputString(
-                                scanner,
-                                "Jenis Minuman Baru: "
-                        );
+                        jenisBaru = inputString(scanner, "Jenis Minuman Baru: ");
                     }
 
                     if (restoran.updateMenu(
@@ -311,15 +232,11 @@ public class SistemManajemenDataMenuRestoran {
                             hargaBaru,
                             jenisBaru)) {
 
-                        System.out.println(
-                                ">> Menu berhasil diperbarui"
-                        );
+                        System.out.println(">> Menu berhasil diperbarui");
 
                     } else {
 
-                        System.out.println(
-                                ">> Menu gagal diperbarui"
-                        );
+                        System.out.println(">> Menu gagal diperbarui");
                     }
                 }
 
@@ -327,22 +244,15 @@ public class SistemManajemenDataMenuRestoran {
 
                     System.out.println("\n=== HAPUS MENU ===");
 
-                    String idTarget = inputString(
-                            scanner,
-                            "Masukkan ID Menu: "
-                    );
+                    String idTarget = inputString(scanner, "Masukkan ID Menu: ");
 
                     if (restoran.hapusMenu(idTarget)) {
 
-                        System.out.println(
-                                ">> Menu berhasil dihapus"
-                        );
+                        System.out.println(">> Menu berhasil dihapus");
 
                     } else {
 
-                        System.out.println(
-                                ">> Menu tidak ditemukan"
-                        );
+                        System.out.println(">> Menu tidak ditemukan");
                     }
                 }
 
@@ -350,9 +260,7 @@ public class SistemManajemenDataMenuRestoran {
 
                     berjalan = false;
 
-                    System.out.println(
-                            "\n>> Program selesai. Terima kasih!"
-                    );
+                    System.out.println("\n>> Program selesai. Terima kasih");
                 }
             }
         }
@@ -362,9 +270,7 @@ public class SistemManajemenDataMenuRestoran {
 
     private static void tampilkanMenuUtama() {
 
-        System.out.println(
-                "\n=== SISTEM MANAJEMEN MENU RESTORAN ==="
-        );
+        System.out.println("\n=== SISTEM MANAJEMEN MENU RESTORAN ===");
 
         System.out.println("1. Tambah Kategori");
         System.out.println("2. Tampilkan Kategori");
@@ -375,16 +281,11 @@ public class SistemManajemenDataMenuRestoran {
         System.out.println("7. Keluar");
     }
 
-    private static Kategori pilihKategori(
-            Scanner scanner,
-            Restoran restoran) {
+    private static Kategori pilihKategori(Scanner scanner, Restoran restoran) {
 
         if (restoran.getDaftarKategori().isEmpty()) {
 
-            System.out.println(
-                    ">> Belum ada kategori. "
-                    + "Tambahkan kategori terlebih dahulu."
-            );
+            System.out.println(">> Belum ada kategori. "+ "Tambahkan kategori terlebih dahulu.");
 
             return null;
         }
@@ -394,26 +295,16 @@ public class SistemManajemenDataMenuRestoran {
         for (Kategori kategori
                 : restoran.getDaftarKategori()) {
 
-            System.out.println(
-                    kategori.getIdKategori()
-                    + " - "
-                    + kategori.getNamaKategori()
-            );
+            System.out.println(kategori.getIdKategori()+ " - "+ kategori.getNamaKategori());
         }
 
-        String idKategori = inputString(
-                scanner,
-                "ID Kategori: "
-        );
+        String idKategori = inputString(scanner, "ID Kategori: ");
 
-        Kategori kategori =
-                restoran.cariKategori(idKategori);
+        Kategori kategori = restoran.cariKategori(idKategori);
 
         if (kategori == null) {
 
-            System.out.println(
-                    ">> Kategori tidak ditemukan"
-            );
+            System.out.println(">> Kategori tidak ditemukan");
         }
 
         return kategori;
@@ -433,9 +324,7 @@ public class SistemManajemenDataMenuRestoran {
                 return input;
             }
 
-            System.out.println(
-                    ">> Input tidak boleh kosong"
-            );
+            System.out.println(">> Input tidak boleh kosong");
         }
     }
 
@@ -461,25 +350,16 @@ public class SistemManajemenDataMenuRestoran {
                     return pilihan;
                 }
 
-                System.out.println(
-                        ">> Pilihan harus antara "
-                        + minimum
-                        + " dan "
-                        + maksimum
-                );
+                System.out.println(">> Pilihan harus antara " + minimum + " dan " + maksimum);
 
             } catch (NumberFormatException e) {
 
-                System.out.println(
-                        ">> Input harus berupa angka"
-                );
+                System.out.println(">> Input harus berupa angka");
             }
         }
     }
 
-    private static double inputHarga(
-            Scanner scanner,
-            String pesan) {
+    private static double inputHarga(Scanner scanner, String pesan) {
 
         while (true) {
 
@@ -495,15 +375,11 @@ public class SistemManajemenDataMenuRestoran {
                     return harga;
                 }
 
-                System.out.println(
-                        ">> Harga tidak boleh negatif"
-                );
+                System.out.println(">> Harga tidak boleh negatif");
 
             } catch (NumberFormatException e) {
 
-                System.out.println(
-                        ">> Harga harus berupa angka"
-                );
+                System.out.println(">> Harga harus berupa angka");
             }
         }
     }
