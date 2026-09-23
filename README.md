@@ -265,8 +265,8 @@ Kategori kategoriMakanan = new Kategori(
     "Makanan",
     "Kategori makanan restoran"
 );
-
-noted: untuk kode readme (```java) saya cari tau sendiri bang dari ai
+```
+note: untuk kode readme (java) saya cari tau sendiri bang dari ai
 
 Contoh tersebut menunjukkan bahwa `kategoriMakanan` merupakan object dari class `Kategori`.
 
@@ -280,6 +280,7 @@ Menu makananAwal = new MenuMakanan(
     25000,
     "Makanan Utama"
 );
+```
 
 Contoh tersebut menunjukkan bahwa object `makananAwal` dibuat menggunakan class `MenuMakanan`, tetapi dapat disimpan menggunakan tipe `Menu`.
 
