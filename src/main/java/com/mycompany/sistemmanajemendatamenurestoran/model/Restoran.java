@@ -1,6 +1,8 @@
 package com.mycompany.sistemmanajemendatamenurestoran.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Restoran {
 
@@ -34,12 +36,12 @@ public class Restoran {
         return noTelepon;
     }
 
-    public ArrayList<Menu> getDaftarMenu() {
-        return daftarMenu;
+    public List<Menu> getDaftarMenu() {
+        return Collections.unmodifiableList(daftarMenu);
     }
 
-    public ArrayList<Kategori> getDaftarKategori() {
-        return daftarKategori;
+    public List<Kategori> getDaftarKategori() {
+        return Collections.unmodifiableList(daftarKategori);
     }
 
     public void setNamaRestoran(String namaRestoran) {
@@ -54,8 +56,14 @@ public class Restoran {
         this.noTelepon = noTelepon;
     }
 
-    public void tambahKategori(Kategori kategori) {
+    public boolean tambahKategori(Kategori kategori) {
+
+        if (cariKategori(kategori.getIdKategori()) != null) {
+            return false;
+        }
+
         daftarKategori.add(kategori);
+        return true;
     }
 
     public Kategori cariKategori(String idKategori) {
@@ -95,7 +103,9 @@ public class Restoran {
     public boolean updateMenu(
             String idMenu,
             String namaBaru,
-            double hargaBaru) {
+            Kategori kategoriBaru,
+            double hargaBaru,
+            String jenisBaru) {
 
         Menu menu = cariMenu(idMenu);
 
@@ -104,7 +114,19 @@ public class Restoran {
         }
 
         menu.setNamaMenu(namaBaru);
+        menu.setKategori(kategoriBaru);
         menu.setHarga(hargaBaru);
+
+        if (menu instanceof MenuMakanan) {
+
+            MenuMakanan makanan = (MenuMakanan) menu;
+            makanan.setJenisMakanan(jenisBaru);
+
+        } else if (menu instanceof MenuMinuman) {
+
+            MenuMinuman minuman = (MenuMinuman) menu;
+            minuman.setJenisMinuman(jenisBaru);
+        }
 
         return true;
     }

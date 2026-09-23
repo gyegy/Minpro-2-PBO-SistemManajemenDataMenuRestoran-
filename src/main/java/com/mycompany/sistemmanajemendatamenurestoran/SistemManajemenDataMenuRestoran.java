@@ -37,7 +37,7 @@ public class SistemManajemenDataMenuRestoran {
                 "Nasi Goreng",
                 kategoriMakanan,
                 25000,
-                "Makanan Utama"
+                "Makanan Nusantara"
         );
 
         Menu minumanAwal = new MenuMinuman(
@@ -60,7 +60,10 @@ public class SistemManajemenDataMenuRestoran {
 
             int pilihan = inputPilihan(
                     scanner,
-                    "Pilih menu (1-7): ",1,7);
+                    "Pilih menu (1-7): ",
+                    1,
+                    7
+            );
 
             switch (pilihan) {
 
@@ -89,11 +92,18 @@ public class SistemManajemenDataMenuRestoran {
                             deskripsi
                     );
 
-                    restoran.tambahKategori(kategoriBaru);
+                    if (restoran.tambahKategori(kategoriBaru)) {
 
-                    System.out.println(
-                            ">> Kategori berhasil ditambahkan"
-                    );
+                        System.out.println(
+                                ">> Kategori berhasil ditambahkan"
+                        );
+
+                    } else {
+
+                        System.out.println(
+                                ">> ID Kategori sudah digunakan"
+                        );
+                    }
                 }
 
                 case 2 -> {
@@ -101,9 +111,11 @@ public class SistemManajemenDataMenuRestoran {
                     System.out.println("\n=== DAFTAR KATEGORI ===");
 
                     if (restoran.getDaftarKategori().isEmpty()) {
+
                         System.out.println(
                                 ">> Belum ada data kategori"
                         );
+
                         break;
                     }
 
@@ -218,11 +230,16 @@ public class SistemManajemenDataMenuRestoran {
                     System.out.println("\n=== DAFTAR MENU ===");
 
                     if (restoran.getDaftarMenu().isEmpty()) {
-                        System.out.println("Belum ada data menu");
+
+                        System.out.println(
+                                "Belum ada data menu"
+                        );
+
                         break;
                     }
 
                     for (Menu menu : restoran.getDaftarMenu()) {
+
                         menu.tampilkanInfo();
                         System.out.println();
                     }
@@ -240,26 +257,59 @@ public class SistemManajemenDataMenuRestoran {
                     Menu menu = restoran.cariMenu(idTarget);
 
                     if (menu == null) {
+
                         System.out.println(
                                 ">> Menu tidak ditemukan"
                         );
+
                         break;
                     }
+
+                    System.out.println("\n=== DATA MENU SAAT INI ===");
+                    menu.tampilkanInfo();
+
+                    System.out.println();
 
                     String namaBaru = inputString(
                             scanner,
                             "Nama Menu Baru: "
                     );
 
+                    Kategori kategoriBaru =
+                            pilihKategori(scanner, restoran);
+
+                    if (kategoriBaru == null) {
+                        break;
+                    }
+
                     double hargaBaru = inputHarga(
                             scanner,
                             "Harga Baru: "
                     );
 
+                    String jenisBaru;
+
+                    if (menu instanceof MenuMakanan) {
+
+                        jenisBaru = inputString(
+                                scanner,
+                                "Jenis Makanan Baru: "
+                        );
+
+                    } else {
+
+                        jenisBaru = inputString(
+                                scanner,
+                                "Jenis Minuman Baru: "
+                        );
+                    }
+
                     if (restoran.updateMenu(
                             idTarget,
                             namaBaru,
-                            hargaBaru)) {
+                            kategoriBaru,
+                            hargaBaru,
+                            jenisBaru)) {
 
                         System.out.println(
                                 ">> Menu berhasil diperbarui"
@@ -341,7 +391,8 @@ public class SistemManajemenDataMenuRestoran {
 
         System.out.println("\n=== PILIH KATEGORI ===");
 
-        for (Kategori kategori : restoran.getDaftarKategori()) {
+        for (Kategori kategori
+                : restoran.getDaftarKategori()) {
 
             System.out.println(
                     kategori.getIdKategori()
