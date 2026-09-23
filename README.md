@@ -1,5 +1,9 @@
 # Sistem Manajemen Data Menu Restoran
 
+## Nama: Muhammad Arzad
+## Kelas: A'25
+## NIM: 2509116014
+
 ## 1. Deskripsi Singkat Program
 
 Sistem Manajemen Data Menu Restoran merupakan program berbasis Java yang digunakan untuk mengelola data kategori dan menu restoran. Program ini memiliki fitur untuk menambah, menampilkan, mengubah, dan menghapus data menu serta menambah dan menampilkan data kategori.
